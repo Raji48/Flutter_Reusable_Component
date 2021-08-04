@@ -48,7 +48,7 @@ class _MyHomePageState extends State<MyHomePage> {
           children:[
             SizedBox(height: 80,),
             // FloatingTextField
-          CustomTextfield("label","InputText",true,Colors.orange,Colors.green),
+          CustomTextfield("label","InputText",false,Colors.orange,Colors.green),
             SizedBox(height: 20,),
           //FloatingTextField with validator
             TextFormField(
