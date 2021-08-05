@@ -1,7 +1,11 @@
+
 import 'package:flutter/material.dart';
+import 'package:reusable_components/components/dialogbox.dart';
 import 'package:reusable_components/components/textfield.dart';
 import 'package:reusable_components/components/textfield_validation.dart';
 
+
+final navigatorKey = GlobalKey<NavigatorState>();
 void main() {
   runApp(MyApp());
 }
@@ -38,29 +42,44 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   GlobalKey<FormState> formkey = GlobalKey<FormState>();
-  var _controller=TextEditingController();
+  var _controller = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body:Form(
-        key:formkey,
-     child: Column(
-          children:[
-            SizedBox(height: 80,),
-            // FloatingTextField
-          CustomTextfield("label","InputText",false,Colors.orange,Colors.green),
-            SizedBox(height: 20,),
-          //FloatingTextField with validator
-            TextFormField(
-             // controller: _controller,
-              validator: validateemail,
-              decoration: buildInputDecoration("email", "", false, Colors.orangeAccent,Colors.green),
-              onFieldSubmitted: (value) {
-                formkey.currentState!.validate();
-              }
-            )
-      ]
-      ),
-    ));
+        body: Form(
+          key: formkey,
+          child: Column(
+              children: [
+                SizedBox(height: 80,),
+                // FloatingTextField
+                CustomTextfield(
+                    "label", "InputText", false, Colors.orange, Colors.green),
+                SizedBox(height: 20,),
+                //FloatingTextField with validator
+                TextFormField(
+                  // controller: _controller,
+                    validator: validateemail,
+                    decoration: buildInputDecoration("email", "", false, Colors.orangeAccent, Colors.green),
+                    onFieldSubmitted: (value) {
+                      formkey.currentState!.validate();
+                    }
+                ),
+
+                TextfieldValidation("fdfddf", "email", false, Colors.orangeAccent, Colors.black, validateemail),
+                SizedBox(height: 20,),
+                // check alermessage dialog box
+                MaterialButton(onPressed: () {
+                  Future.delayed(const Duration(milliseconds: 100), (){
+                   BaseAlertDialog.dialogbox(Icons.logout, "Logout", "Are you sure want to logout",context);
+                  });
+
+                },
+                  child: Text("alertbox"),
+                )
+              ]
+          ),
+        ));
   }
-}
+
+  }
