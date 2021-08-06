@@ -51,7 +51,7 @@ String validateemail(value){
   if(value.isEmpty){
     return "Please enter email";
   }
-  if(!RegExp("^[a-zA-Z0-9+_.-]+@optisolbusiness+.com").hasMatch(value)){
+  if(!RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+").hasMatch(value)){
     return "Please enter valid email";
   }
   return "";

@@ -19,7 +19,7 @@ class CustomTextfield extends StatefulWidget {
 class _CustomTextfieldState extends State<CustomTextfield> {
   @override
   Widget build(BuildContext context) {
-    return TextField(
+    return TextFormField(
       cursorColor: Colors.red,
        decoration: buildInputDecoration(widget.labelText,widget.hintText,widget.underlineborderDecoration,widget.enableborderColor,widget.focusborderColor)
      //  InputDecoration(labelText:widget.labelText,focusedBorder: focusborder,enabledBorder: enableborder),

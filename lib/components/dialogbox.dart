@@ -1,8 +1,7 @@
-
  import 'package:flutter/material.dart';
 
 class BaseAlertDialog{
-   static dialogbox(iconName ,alertTitle, alertText, BuildContext context) {
+   static dialogbox(iconName ,alertTitle, alertText, BuildContext context,VoidCallback onPressed) {
     return showDialog(
        context:context,
         builder: (BuildContext context) {
@@ -37,10 +36,8 @@ class BaseAlertDialog{
                                 child: Text("No", style: TextStyle(color:Colors.black),),
                               ),
                               RaisedButton(
-                                onPressed: () async {
-
-                                },
-                                color:Colors.orangeAccent,
+                                onPressed: onPressed,//() async {},
+                                color:Colors.green,
                                 shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(20)),
                                 child: Text("yes"),
