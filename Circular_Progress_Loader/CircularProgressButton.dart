@@ -22,7 +22,7 @@ class CircularProgressButton extends StatefulWidget {
 }
 
 class _CircularProgressButtonState extends State<CircularProgressButton> with TickerProviderStateMixin{
-  // int _state = 0;
+  int _state = 0;
   // Color txtclr=widget.txtcolor;
   // double size=widget.txtsize;
 
@@ -41,8 +41,8 @@ class _CircularProgressButtonState extends State<CircularProgressButton> with Ti
                 child: setUpButtonChild(),
                 onPressed: () {
                   setState(() {
-                    if (widget.state == 0) {
-                      animateButton(widget.state);
+                    if (_state == 0) {
+                      animateButton();
                     }
                   });
                 },
@@ -59,7 +59,7 @@ class _CircularProgressButtonState extends State<CircularProgressButton> with Ti
 
   Widget setUpButtonChild() {
 
-    if (widget.state == 0) {
+    if (_state == 0) {
       return new Text(
         widget.initialbtntext,
         style:  TextStyle(
@@ -67,7 +67,7 @@ class _CircularProgressButtonState extends State<CircularProgressButton> with Ti
           fontSize: widget.txtsize,
         ),
       );
-    } else if (widget.state == 1) {
+    } else if (_state == 1) {
       return
       Row(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -77,7 +77,7 @@ class _CircularProgressButtonState extends State<CircularProgressButton> with Ti
           ),
           Container(width: 20.0,),
           Text(
-            "Loading....",
+            widget.lodingbtntext,
             style:  TextStyle(
               color: widget.txtcolor,
               fontSize: widget.txtsize,
@@ -89,10 +89,10 @@ class _CircularProgressButtonState extends State<CircularProgressButton> with Ti
       return Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Icon(Icons.check, color: Colors.white,size: 28.0,),
+          Icon(Icons.check, color: widget.txtcolor,size: 28.0,),
           Container(width: 20.0,),
           Text(
-            "Compeleted",
+            widget.successbtntext,
             style:  TextStyle(
               color: widget.txtcolor,
               fontSize: widget.txtsize,
@@ -103,14 +103,14 @@ class _CircularProgressButtonState extends State<CircularProgressButton> with Ti
     }
   }
 
-  void animateButton(int state) {
+  void animateButton() {
     setState(() {
-      state = 1;
+      _state = 1;
     });
 
     Timer(Duration(milliseconds: 3300), () {
       setState(() {
-        state = 2;
+        _state = 2;
       });
     });
   }
