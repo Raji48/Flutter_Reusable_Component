@@ -9,7 +9,6 @@ class CustomTextfield extends StatefulWidget {
  final Color enableborderColor;
  final Color focusborderColor;
 
-
   CustomTextfield(this.labelText,this.hintText,this.underlineborderDecoration,this.enableborderColor,this.focusborderColor);
 
   @override

@@ -2,90 +2,185 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:reusable_components/components/textfield.dart';
 
-class TextfieldValidation extends StatefulWidget {
-  final String labelText;
-  final  String hintText;
-  final bool underlineborderDecoration;
-  final Color enableborderColor;
-  final Color focusborderColor;
-  final Function _validator;
-  //final TextfieldValidation _validation;
 
-  TextfieldValidation(this.labelText,this.hintText,this.underlineborderDecoration,this.enableborderColor,this.focusborderColor,this._validator);
+
+class MyTextFormField extends StatefulWidget {
+  String labelText;
+   String hintText;
+   bool isPassword=false;
+   bool isEmail=false;
+   bool isnum=false;
+   dynamic validateName;
+   String errorText;
+   String subErrorText;
+   dynamic  inputformat;
+   FocusNode focusField;
+   dynamic nextFocusField;
+   TextEditingController textcontroller;
+
+  MyTextFormField(
+      this.textcontroller,
+      this.labelText,
+      this.hintText,
+      this.focusField,
+      this.nextFocusField,
+      this.inputformat,
+      this.isPassword ,
+      this.isEmail ,
+      this.isnum,
+      this.validateName,
+      this.errorText,
+      this.subErrorText,
+  );
+
   @override
-  _TextfieldValidationState createState() => _TextfieldValidationState();
+  _MyTextFormFieldState createState() => _MyTextFormFieldState();
 }
 
-class _TextfieldValidationState extends State<TextfieldValidation> {
-  GlobalKey<FormState> formkey = GlobalKey<FormState>();
+String emailValue="";
+String name='';
+
+class _MyTextFormFieldState extends State<MyTextFormField> {
+  bool _textErrorValid=false;
+  bool _textValid=false;
+  String userName='';
+  bool showPassword = true;
+  void initState(){
+    _textErrorValid=false;
+    _textValid=false;
+    userName='';
+    showPassword = true;
+    super.initState();
+  }
   @override
   Widget build(BuildContext context) {
-    return TextFormField(
-      key: formkey,
-        cursorColor: Colors.red,
-        decoration: buildInputDecoration(widget.labelText,widget.hintText,widget.underlineborderDecoration,widget.enableborderColor,widget.focusborderColor),
-        validator:validateemail,
-      onFieldSubmitted: (value){
-        formkey.currentState!.validate();
-      },
-    );
+    return //Padding(
+      //padding: EdgeInsets.all(8.0),
+      // child:
+      TextFormField(
+        controller: widget.textcontroller,
+        focusNode:widget.focusField,
+        inputFormatters:widget.inputformat,
+        maxLength: widget.isnum?10:null,
+        decoration: InputDecoration(
+          labelText: widget.labelText,
+          hintText: widget.hintText,
+          errorText: _textErrorValid ? (userName.isEmpty ? widget.errorText : widget.subErrorText) : null,
+          contentPadding: EdgeInsets.all(15.0),
+          border: enableborder,
+          filled: true,
+        //  fillColor: Colors.grey[200],
+          counterText: "",
+           suffixIcon:
+           widget.isPassword ? IconButton(
+            onPressed: () {
+              setState(() {
+                showPassword = !showPassword;
+              });
+            },
+            icon:showPassword ? Icon(Icons.visibility_off,color:Colors.black26,):Icon(Icons.visibility,color: Colors.grey,),
+
+          ):null,
+        ),
+        obscureText: widget.isPassword ? showPassword :false,
+        onChanged: (text) {
+          _update(text, 1);
+          if (text.isNotEmpty) {
+            if (widget.validateName(text)) {
+              setState(() {
+                _textErrorValid = false;
+              });
+            //  FocusScope.of(context).unfocus();
+            } else {
+              setState(() {
+                _textValid = true;
+                _textErrorValid = true;
+              });
+            }
+          } else {
+            setState(() {
+              _textValid = true;
+              _textErrorValid = true;
+            });
+          }
+        },
+        onFieldSubmitted: (text) {
+          if (text.isNotEmpty) {
+            if (widget.validateName(text)) {
+              setState(() {
+                _textErrorValid = false;
+              });
+              FocusScope.of(context).requestFocus(widget.nextFocusField);
+            } else {
+              setState(() {
+                _textValid = true;
+                _textErrorValid = true;
+              });
+              FocusScope.of(context).requestFocus(widget.focusField);
+            }
+          } else {
+            setState(() {
+              _textValid = true;
+              _textErrorValid = true;
+            });
+            FocusScope.of(context).requestFocus(widget.focusField);
+          }
+        },
+        keyboardType: widget.isEmail ? TextInputType.emailAddress : widget.isnum?TextInputType.number:TextInputType.text,
+      );
+  }
+
+  _update(text, type) {
+    if (widget.validateName(text)) {
+      setState(() {
+       userName = text;
+       if(widget.labelText=="email")
+           emailValue=userName;
+
+       if(widget.labelText=='name')
+         name=userName;
+
+      _textErrorValid = false;
+      });
+      return userName;
+    } else {
+      setState(() {
+        userName = text;
+      });
+    }
   }
 }
 
 
-
-
-
-
-
-
-String validatename(value){
-  if(value.isEmpty){
-    return "Please enter firstname";
-  }
-  return "";
+validateEmail(text) {
+  Pattern pattern = r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+";
+  RegExp regExp = new RegExp(pattern.toString());
+  return regExp.hasMatch(text);
 }
-String validateemail(value){
-  if(value.isEmpty){
-    return "Please enter email";
-  }
-  if(!RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+").hasMatch(value)){
-    return "Please enter valid email";
-  }
-  return "";
+
+validatename(value){
+  Pattern pattern =r"^[a-zA-Z](\/?[0-9a-z])*";
+  RegExp regExp = new RegExp(pattern.toString());
+  return regExp.hasMatch(value);
+}
+
+validateNumber(text){
+  Pattern pattern=r"^\d{10}$";
+  RegExp regExp =RegExp(pattern.toString());
+  return regExp.hasMatch(text) ;
+}
+
+validatePassword(text){
+  Pattern pattern=r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{6,}$';
+  RegExp regExp =RegExp(pattern.toString());
+  return regExp.hasMatch(text) ;
 }
 //
-// String validatephone(value) {
-//   if (value.isEmpty) {
-//     return "Please enter phonenumber";
-//   }
-//   if (value.length == 10) {
-//     return null;
-//   } else {
-//     return "Please enter valid phonenumber";
-//   }
-// }
+// validateConPassword(text){
+//   String xxx="username";
+//  if ("username"==text)
 //
-//
-// String validatepass(value){
-//   if(value.isEmpty){
-//     return "Please enter password";
-//   } if(!RegExp( r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{6,}$').hasMatch(value)){
-//     return "Password length should be 6-10,at least one upper case,\nlower case,digit and Special character";
-//   }
-//   else if(value.length<6){
-//     return "Should be At Least 6 characters";
-//   }else if(value.length>10) {
-//     return "Should not be more than 10 characters";
-//   }
-//   return null;
-// }
-//
-// String validatefield(value){
-//   if(value.isEmpty){
-//     return "This field is Required ";
-//   }
-//   return null;
 // }

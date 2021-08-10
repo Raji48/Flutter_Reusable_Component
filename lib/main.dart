@@ -1,6 +1,7 @@
 
 import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:reusable_components/components/dialogbox.dart';
 import 'package:reusable_components/components/textfield.dart';
 import 'package:reusable_components/components/textfield_validation.dart';
@@ -34,56 +35,58 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   GlobalKey<FormState> formkey = GlobalKey<FormState>();
-  var _controller = TextEditingController();
-  double progress = 0;
-   bool onPress=false;
-  void initState() {
-    super.initState();
-
-    Timer.periodic(Duration(milliseconds: 100), (Timer t) {
-      setState(() {
-        if (progress > 120) {
-          progress = 0;
-        } else {
-          progress += 5;
-        }
-      });
-    });
-  }
-
+  bool _userNameErrorValid = false;
+  bool _userNameValid=false;
+  FocusNode emailField = FocusNode();
+  String userName = '';
+  FocusNode usernameField = FocusNode();
+  FocusNode passwordField = FocusNode();
+  FocusNode confirmPasswordField = FocusNode();
+  FocusNode phoneField = FocusNode();
+  var emailcontroller= TextEditingController();
+  var namecontroller= TextEditingController();
+  var passwordcontroller= TextEditingController();
+  var phonecontroller= TextEditingController();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        resizeToAvoidBottomInset: false,
         body: Form(
           key: formkey,
           child: Column(
               children: [
                 SizedBox(height: 80,),
                 // FloatingTextField
-                CustomTextfield("label name", "",false, Colors.orange, Colors.green),
+                //  CustomTextfield("label name", "",false, Colors.orange, Colors.green),
                 SizedBox(height: 20,),
 
                 //FloatingTextField with validator
-                TextFormField(
-                  // controller: _controller,
-                    validator: validateemail,
-                    decoration: buildInputDecoration("email", "", false, Colors.orangeAccent, Colors.green),
-                    onFieldSubmitted: (value) {
-                      formkey.currentState!.validate();
-                    },
-                  onChanged: (value){
-                    formkey.currentState!.validate();
-                  },
-                ),
+                MyTextFormField(emailcontroller,"email","input Text",emailField,usernameField,null,false,true,false,validateEmail, "EmailRequired", "Email not valid",),
                 SizedBox(height: 20,),
-               // TextfieldValidation("fdfddf", "email", false, Colors.orangeAccent, Colors.black, validateemail),
-              //  SizedBox(height: 20,),
+                MyTextFormField(namecontroller,"name","",usernameField,phoneField,[WhitelistingTextInputFormatter(RegExp(r"[a-zA-Z]+|\s"))],false,false,false,validatename,"NameRequired", "",),
+                SizedBox(height: 20,),
+               MyTextFormField(phonecontroller,"phone","",phoneField,passwordField,[FilteringTextInputFormatter.digitsOnly],false,false,true,validateNumber,"phoneRequired", "Phone number not valid",),
+                SizedBox(height: 20,),
+               MyTextFormField(passwordcontroller,"password","",passwordField,confirmPasswordField,null,true,false,false,validatePassword,"PasswordRequired","Password Not Valid" ,),
+                SizedBox(height: 20,),
+             //   MyTextFormField("password","",confirmPasswordField,null,null,true,false,false,validateConPassword,"Reenter Password","Password Not Match" ,),
 
+                SizedBox(height: 20,),
+                // TextfieldValidation("email", "email", false, Colors.orangeAccent, Colors.black,formkey ),
+                SizedBox(height: 20,),
+                 //  TextfieldValidation("name", "", false, Colors.orangeAccent, Colors.black,formkey ),
                 // check alermessage dialog box
                 MaterialButton(onPressed: () {
-                  Future.delayed(const Duration(milliseconds: 100), (){
-                   BaseAlertDialog.dialogbox(Icons.logout, "Logout", "Are you sure want to logout",context,()=>check());
+                  print(emailcontroller.text);
+                  print(namecontroller.text);
+                  print(passwordcontroller.text);
+                      print(phonecontroller.text);
+
+                  Future.delayed(const Duration(milliseconds: 100), () {
+                    BaseAlertDialog.dialogbox(
+                        Icons.logout, "Logout", "Are you sure want to logout",
+                        context, () => check());
                   });
                 },
                   child: Text("alertbox"),
@@ -93,9 +96,11 @@ class _MyHomePageState extends State<MyHomePage> {
         ));
   }
 
-   check(){
-     Navigator.of(context).pop(false);
-     print("its work");
-  }
+  check() {
+    Navigator.of(context).pop(false);
+    print("its work");
+    print(emailValue);
+    print(name);
   }
 
+  }
