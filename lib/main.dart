@@ -77,20 +77,24 @@ class _MyHomePageState extends State<MyHomePage> {
                 SizedBox(height: 20,),
                  //  TextfieldValidation("name", "", false, Colors.orangeAccent, Colors.black,formkey ),
                 // check alermessage dialog box
-                MaterialButton(onPressed: () {
-                  print(emailcontroller.text);
-                  print(namecontroller.text);
-                  print(passwordcontroller.text);
-                      print(phonecontroller.text);
+               Center(
+                 child: MaterialButton(
+                   color: Colors.blueGrey,
+                   onPressed: () {
+                    // print(emailcontroller.text);
+                    // print(namecontroller.text);
+                    // print(passwordcontroller.text);
+                    //     print(phonecontroller.text);
 
-                  Future.delayed(const Duration(milliseconds: 100), () {
-                    BaseAlertDialog.dialogbox(
-                        Icons.logout, "Logout", "Are you sure want to logout",
-                        context, () => check());
-                  });
-                },
-                  child: Text("alertbox"),
-                ),
+                    Future.delayed(const Duration(milliseconds: 10), () {
+                      BaseAlertDialog.dialogbox(
+                          Icons.logout, "Logout", "Are you sure want to logout",
+                          context, () => check());
+                    });
+                  },
+                    child: Text("alertbox"),
+                  ),
+               ),
               ]
           ),
         ));
