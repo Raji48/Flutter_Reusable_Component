@@ -61,15 +61,15 @@ class _MyHomePageState extends State<MyHomePage> {
                 //  CustomTextfield("label name", "",false, Colors.orange, Colors.green),
                 SizedBox(height: 20,),
 
-                //FloatingTextField with validator
-                MyTextFormField(emailcontroller,"email","input Text",emailField,usernameField,null,false,true,false,validateEmail, "EmailRequired", "Email not valid",),
-                SizedBox(height: 20,),
-                MyTextFormField(namecontroller,"name","",usernameField,phoneField,[WhitelistingTextInputFormatter(RegExp(r"[a-zA-Z]+|\s"))],false,false,false,validatename,"NameRequired", "",),
-                SizedBox(height: 20,),
-               MyTextFormField(phonecontroller,"phone","",phoneField,passwordField,[FilteringTextInputFormatter.digitsOnly],false,false,true,validateNumber,"phoneRequired", "Phone number not valid",),
-                SizedBox(height: 20,),
-               MyTextFormField(passwordcontroller,"password","",passwordField,confirmPasswordField,null,true,false,false,validatePassword,"PasswordRequired","Password Not Valid" ,),
-                SizedBox(height: 20,),
+               //  //FloatingTextField with validator
+               //  MyTextFormField(emailcontroller,"email","input Text",emailField,usernameField,null,false,true,false,validateEmail, "EmailRequired", "Email not valid",),
+               //  SizedBox(height: 20,),
+               //  MyTextFormField(namecontroller,"name","",usernameField,phoneField,[WhitelistingTextInputFormatter(RegExp(r"[a-zA-Z]+|\s"))],false,false,false,validatename,"NameRequired", "",),
+               //  SizedBox(height: 20,),
+               // MyTextFormField(phonecontroller,"phone","",phoneField,passwordField,[FilteringTextInputFormatter.digitsOnly],false,false,true,validateNumber,"phoneRequired", "Phone number not valid",),
+               //  SizedBox(height: 20,),
+               // MyTextFormField(passwordcontroller,"password","",passwordField,confirmPasswordField,null,true,false,false,validatePassword,"PasswordRequired","Password Not Valid" ,),
+               //  SizedBox(height: 20,),
              //   MyTextFormField("password","",confirmPasswordField,null,null,true,false,false,validateConPassword,"Reenter Password","Password Not Match" ,),
 
                 SizedBox(height: 20,),
