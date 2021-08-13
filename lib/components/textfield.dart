@@ -29,7 +29,7 @@ class _CustomTextfieldState extends State<CustomTextfield> {
 InputDecoration buildInputDecoration(String labeltext,String hinttext,bool lineborderdecoration,Color enablebordercolor, Color focusbordercolor) {
 return InputDecoration(
       labelText: labeltext,
-      hintText:hinttext ,
+      hintText:hinttext,
       labelStyle: TextStyle(color:enablebordercolor,fontFamily: 'ProximaNova-Regular',fontSize: 15),
      focusedBorder:lineborderdecoration?focusedBorder:focusborder,
      border:lineborderdecoration?enabledBorder:enableborder,

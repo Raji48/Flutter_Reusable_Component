@@ -5,20 +5,22 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:reusable_components/components/textfield.dart';
 
-
 class MyTextFormField extends StatefulWidget {
   String labelText;
    String hintText;
    bool isPassword=false;
+   dynamic validator;
    bool isEmail=false;
    bool isnum=false;
-   dynamic validateName;
    String errorText;
    String subErrorText;
    dynamic  inputformat;
    FocusNode focusField;
    dynamic nextFocusField;
    TextEditingController textcontroller;
+   dynamic onTap;
+   bool isDatepicker;
+   RegExp regExp;
 
   MyTextFormField(
       this.textcontroller,
@@ -28,19 +30,20 @@ class MyTextFormField extends StatefulWidget {
       this.nextFocusField,
       this.inputformat,
       this.isPassword ,
+      this.validator,
       this.isEmail ,
       this.isnum,
-      this.validateName,
       this.errorText,
       this.subErrorText,
+      this.onTap,
+      this.isDatepicker,
+      this.regExp,
   );
 
   @override
   _MyTextFormFieldState createState() => _MyTextFormFieldState();
 }
 
-String emailValue="";
-String name='';
 
 class _MyTextFormFieldState extends State<MyTextFormField> {
   bool _textErrorValid=false;
@@ -60,10 +63,11 @@ class _MyTextFormFieldState extends State<MyTextFormField> {
       //padding: EdgeInsets.all(8.0),
       // child:
       TextFormField(
+        readOnly: widget.isDatepicker,
         controller: widget.textcontroller,
         focusNode:widget.focusField,
         inputFormatters:widget.inputformat,
-        maxLength: widget.isnum?10:null,
+        maxLength: widget.isnum?10:widget.isPassword?8:null,
         decoration: InputDecoration(
           labelText: widget.labelText,
           hintText: widget.hintText,
@@ -88,7 +92,7 @@ class _MyTextFormFieldState extends State<MyTextFormField> {
         onChanged: (text) {
           _update(text, 1);
           if (text.isNotEmpty) {
-            if (widget.validateName(text)) {
+            if (widget.regExp.hasMatch(text)) {
               setState(() {
                 _textErrorValid = false;
               });
@@ -108,7 +112,7 @@ class _MyTextFormFieldState extends State<MyTextFormField> {
         },
         onFieldSubmitted: (text) {
           if (text.isNotEmpty) {
-            if (widget.validateName(text)) {
+            if (widget.regExp.hasMatch(text)) {
               setState(() {
                 _textErrorValid = false;
               });
@@ -128,21 +132,19 @@ class _MyTextFormFieldState extends State<MyTextFormField> {
             FocusScope.of(context).requestFocus(widget.focusField);
           }
         },
-        keyboardType: widget.isEmail ? TextInputType.emailAddress : widget.isnum?TextInputType.number:TextInputType.text,
+
+       keyboardType: widget.isEmail ? TextInputType.emailAddress : widget.isnum?TextInputType.number:TextInputType.text,
+      onTap: widget.onTap,
+        validator: widget.validator,
       );
   }
 
   _update(text, type) {
-    if (widget.validateName(text)) {
+   // if (widget.validateName(text)) {
+    if(widget.regExp.hasMatch(text)){
       setState(() {
        userName = text;
-       if(widget.labelText=="email")
-           emailValue=userName;
-
-       if(widget.labelText=='name')
-         name=userName;
-
-      _textErrorValid = false;
+       _textErrorValid = false;
       });
       return userName;
     } else {
@@ -154,32 +156,9 @@ class _MyTextFormFieldState extends State<MyTextFormField> {
 }
 
 
-validateEmail(text) {
-  Pattern pattern = r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+";
-  RegExp regExp = new RegExp(pattern.toString());
-  return regExp.hasMatch(text);
+ String? validatename(value){
+  if(value.isEmpty){
+    return "Please enter firstname";
+  }
+  return null;
 }
-
-validatename(value){
-  Pattern pattern =r"^[a-zA-Z](\/?[0-9a-z])*";
-  RegExp regExp = new RegExp(pattern.toString());
-  return regExp.hasMatch(value);
-}
-
-validateNumber(text){
-  Pattern pattern=r"^\d{10}$";
-  RegExp regExp =RegExp(pattern.toString());
-  return regExp.hasMatch(text) ;
-}
-
-validatePassword(text){
-  Pattern pattern=r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{6,}$';
-  RegExp regExp =RegExp(pattern.toString());
-  return regExp.hasMatch(text) ;
-}
-//
-// validateConPassword(text){
-//   String xxx="username";
-//  if ("username"==text)
-//
-// }
