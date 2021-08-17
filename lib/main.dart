@@ -2,6 +2,9 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:reusable_components/components/Button.dart';
+import 'package:reusable_components/components/Snackbar.dart';
+import 'package:reusable_components/components/Snackbar.dart';
 import 'package:reusable_components/components/dialogbox.dart';
 import 'package:reusable_components/components/dropdown.dart';
 import 'package:reusable_components/components/textfield.dart';
@@ -50,6 +53,9 @@ class _MyHomePageState extends State<MyHomePage> {
   var passwordcontroller= TextEditingController();
   var phonecontroller= TextEditingController();
   var datecontroller= TextEditingController();
+  var _confirmpassword = TextEditingController();
+  FocusNode cpasswordfield = FocusNode();
+  bool showPassword1 = true;
 
   List<String> listitem = [
     '4 seats', '5 seats', '6 seats', '7 seats', '8 seats'
@@ -64,7 +70,7 @@ class _MyHomePageState extends State<MyHomePage> {
           key: formkey,
           child: Column(
               children: [
-                SizedBox(height: 80,),
+                SizedBox(height: 180,),
                 // FloatingTextField
                 //  CustomTextfield("label name", "",false, Colors.orange, Colors.green),
                 SizedBox(height: 20,),
@@ -76,23 +82,76 @@ class _MyHomePageState extends State<MyHomePage> {
                //  SizedBox(height: 20,),
                // MyTextFormField(phonecontroller,"phone","",phoneField,passwordField,[FilteringTextInputFormatter.digitsOnly],false,null,false,true,"phoneRequired", "Phone number not valid",null,false,RegExp(r"^\d{10}$")),
                //  SizedBox(height: 20,),
-              // MyTextFormField(passwordcontroller,"password","",passwordField,confirmPasswordField,null,true,false,false,"PasswordRequired","Password Not Valid" ,null,false,RegExp(r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{6,}$')),
+          //     MyTextFormField(passwordcontroller,"password","",passwordField,cpasswordfield,null,true,null,false,false,"PasswordRequired","Password Not Valid" ,null,false,RegExp(r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{6,}$')),
              //   SizedBox(height: 20,),
                // MyTextFormField("password","",confirmPasswordField,null,null,true,false,false,validateConPassword,"Reenter Password","Password Not Match" ,),
              //   SizedBox(height: 20,),
-                MyTextFormField(datecontroller,"DOB","",dateField,null,null,false,null,false,false,"dateRequired", "",(){pickDate();},true,RegExp(r"^[ A-Za-z0-9_@./#&+-]*$")),
-
+               // MyTextFormField(datecontroller,"DOB","",dateField,null,null,false,null,false,false,"dateRequired", "",(){pickDate();},true,RegExp(r"^[ A-Za-z0-9_@./#&+-]*$")),
 
                 // TextfieldValidation("email", "email", false, Colors.orangeAccent, Colors.black,formkey ),
               //  SizedBox(height: 20,),
                  //  TextfieldValidation("name", "", false, Colors.orangeAccent, Colors.black,formkey ),
                 // check alermessage dialog box
+            /*    TextFormField(
+                  focusNode: cpasswordfield,
+                  controller: _confirmpassword,
+                  keyboardType: TextInputType.text,
+                  obscureText: showPassword1,
+                  decoration: InputDecoration(
+                    suffixIcon:
+                    IconButton(
+                      onPressed: () {
+                        setState(() {
+                          showPassword1 =
+                          !showPassword1;
+                        });
+                      },
+                      icon:showPassword1 ? Icon(Icons.visibility_off,color:Colors.black26,):Icon(Icons.visibility,color: Colors.grey,),
+
+                    ),
+                    enabledBorder: enableborder,
+                    focusedBorder: focusborder,
+                    border: enableborder,
+                    labelText: "conpassword",
+                    labelStyle: TextStyle(color:Colors.grey,fontFamily: 'ProximaNova-Regular',fontSize: 15),
+
+                  ),
+                  textInputAction: TextInputAction.done,
+                  onChanged: (value) {
+                    formkey.currentState!.validate();
+
+                  },
+                  onFieldSubmitted: (value) {
+                    formkey.currentState!.validate();
+                    if (validatepass(value) == null) {
+                      FocusScope.of(context).unfocus();
+                    } else {
+                      FocusScope.of(context).requestFocus(
+                          cpasswordfield);
+                    }
+                  },
+                //  onSaved: (input) => cpassword = input,
+                  validator: ( value) {
+                    if (value!.isEmpty) {
+                      return "reenterpassword";
+                    }
+                    if (passwordcontroller.text != _confirmpassword.text) {
+                      return "passwordnotmatch";
+                    }
+                    return null;
+                  },
+                ),*/
+                Text("show Snackbar"),
+
              Center(child:FlatButton(
                child: Text("SUBMIT"),
                onPressed: (){
-                if (formkey.currentState!.validate()) {
-                  print("submit");
-                }
+
+                 ScaffoldMessenger.of(context).showSnackBar(Showbar.displaySnackBar("snackbar", "retry",  (){},context));
+
+                // if (formkey.currentState!.validate()) {
+                //   print("submit");
+                // }
                 // _loginPressed();
                },
              ),),
@@ -115,7 +174,10 @@ class _MyHomePageState extends State<MyHomePage> {
                     child: Text("alertbox"),
                   ),
                ),*/
+
      // DropdownWidget(listitem),
+             //   CustomButtom(false,"button..", 100, 50, (){}),
+
               ]
           ),
         ));
@@ -135,7 +197,5 @@ class _MyHomePageState extends State<MyHomePage> {
     );
     datecontroller.text=datevalidity.toString().substring(0,10);
   }
-
-
 
   }

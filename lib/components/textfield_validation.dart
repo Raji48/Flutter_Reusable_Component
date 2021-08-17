@@ -162,3 +162,18 @@ class _MyTextFormFieldState extends State<MyTextFormField> {
   }
   return null;
 }
+
+
+String? validatepass(value){
+  if(value.isEmpty){
+    return "Please enter password";
+  } if(!RegExp( r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{6,}$').hasMatch(value)){
+    return "Password length should be 6-10,at least one upper case,\nlower case,digit and Special character";
+  }
+  else if(value.length<6){
+    return "Should be At Least 6 characters";
+  }else if(value.length>10) {
+    return "Should not be more than 10 characters";
+  }
+  return null;
+}
