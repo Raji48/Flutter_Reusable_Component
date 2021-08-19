@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "1059614856072",
+    "project_id": "twitterlogin-73c8f",
+    "storage_bucket": "twitterlogin-73c8f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1059614856072:android:46c9cd771f46e5f35da03d",
+        "android_client_info": {
+          "package_name": "com.example.reusable_components"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1059614856072-v32f06r95adubodl7v059bvg10m8dqp0.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC9ZC8KKr88KcONrJZFEZ4Bhe8LFH-2UG4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1059614856072-v32f06r95adubodl7v059bvg10m8dqp0.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
