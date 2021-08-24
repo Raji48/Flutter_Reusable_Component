@@ -30,7 +30,8 @@ dependencies:
   cupertino_icons: ^1.0.2
   firebase_auth: ^3.0.2
   flutter_auth_buttons: ^0.10.0
-  flutter_twitter_login: ^1.1.0
+ # flutter_twitter_login: ^1.1.0
+  twitter_login: ^4.0.1
 
 dev_dependencies:
   flutter_test:
