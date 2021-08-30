@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "735479346466",
+    "project_id": "soucialauthapp",
+    "storage_bucket": "soucialauthapp.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:735479346466:android:fa590037645cf25e9e217b",
+        "android_client_info": {
+          "package_name": "com.example.socialauthapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "735479346466-fo1mq05cdp6mc9mcc90i66jerc6obvp0.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBp90zOxuE5mHs447kJ3oaoIXv79Pm7_OU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "735479346466-fo1mq05cdp6mc9mcc90i66jerc6obvp0.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
