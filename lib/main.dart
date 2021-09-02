@@ -1,16 +1,17 @@
 
-
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
-//import 'package:twitter_login/twitter_login.dart';
+import 'package:google_sign_in/google_sign_in.dart';
+
 
 Future<void>main()async{
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
   runApp(MyApp());
 }
+
 // void main(){
 //   runApp(MyApp());
 //
@@ -24,22 +25,11 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   bool _isLoggedIn=false;
   Map _userObj={};
-
-//Map userData  =
-//{
-// "email" = "dsmr.apps@gmail.com",
-// "id" = 3003332493073668,
-// "name" = "Darwin Morocho",
-// "picture" = {
-// "data" = {
-// "height" = 50,
-// "is_silhouette" = 0,
-// "url" = "https://platform-lookaside.fbsbx.com/platform/profilepic/?asid=3003332493073668",
-// "width" = 50,
-// },
-// }
-//};
-
+  dynamic _user;
+  bool googlelogin=false;
+  String  googleUsername='';
+  String googleUsermail='';
+  Map User={};
 
   @override
   Widget build(BuildContext context) {
@@ -59,8 +49,8 @@ class _MyAppState extends State<MyApp> {
                     //  Image.network("src"),
                   if(_userObj["email"]!=null)Text("user email id:"+_userObj["email"]),//:Text("email not link"),
                     Text("user name :"+_userObj["name"]),
-
                     TextButton(onPressed: (){
+                      signOutFromFacebook();
                       setState(() {
                         _isLoggedIn=false;
                         _userObj={};
@@ -70,12 +60,15 @@ class _MyAppState extends State<MyApp> {
               ):
               Center(
                 child: ElevatedButton(
-                  child: Text("Facebook Login"),
+                  child: Text('Sign in with Facebook',
+                    style: TextStyle(
+                      fontSize: 20,
+                      color: Colors.black54,
+                      fontWeight: FontWeight.w600,
+                    ),),
                   onPressed: (){
-                    //signInWithFacebook();
-                    FacebookAuth.instance.login(
-                      //  permissions: ["email"]
-                    ).then((value){
+                 //    signInWithFacebook();
+                    FacebookAuth.instance.login().then((value){
                       FacebookAuth.instance.getUserData().then((userData){
                         setState(() {
                           print("isloggedtrue");
@@ -88,45 +81,42 @@ class _MyAppState extends State<MyApp> {
                 ),
               ),
             ),
-         /*   TextButton(
-                child: Text('login with facebook'),
-                onPressed: () async {
-                  /*  Future<UserCredential> signInWithFacebook() async {
-                  final LoginResult loginResult = await FacebookAuth.instance.login();
-
-                  // Create a credential from the access token
-                  final OAuthCredential facebookAuthCredential = FacebookAuthProvider
-                      .credential(loginResult.accessToken.token);
-
-                  // Once signed in, return the UserCredential
-                  return FirebaseAuth.instance.signInWithCredential(
-                      facebookAuthCredential);*/
-
-                  await    signInWithFacebook();
-
-                }
-            ),*/
-          /*  Center(
-              child: TextButton(
-                child: Text('login'),
-                style: ButtonStyle(
-                  foregroundColor: MaterialStateProperty.all<Color>(Colors.white),
-                  backgroundColor: MaterialStateProperty.all<Color>(Colors.blueAccent),
-                  minimumSize: MaterialStateProperty.all<Size>(Size(160, 48)),
+            Container(
+              child: googlelogin?Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children:[
+                    Text("Username: "+googleUsername),
+                    Text("Usermail: "+googleUsermail),
+                    TextButton(onPressed: (){
+                      setState(() {
+                        googlelogin=false;
+                      });
+                      signOutFromGoogle();
+                    },child:
+                    Text("Logout"))
+                  ]
+              ):
+              Center(
+                child: ElevatedButton(
+                  child: Text('Sign in with Google',
+                    style: TextStyle(
+                      fontSize: 20,
+                      color: Colors.black54,
+                      fontWeight: FontWeight.w600,
+                    ),),
+                  onPressed: (){
+                    signInWithGoogle();
+                  },
                 ),
-                onPressed: () async {
-                  await login();
-                  // await signInWithTwitter();
-                },
               ),
-            ),*/
+            ),
           ],
         ),
       ),
     );
   }
 
- /* Future login() async {
+  /*Future login() async {
     final twitterLogin = TwitterLogin(
       apiKey: 'eA71Q6zMCA923p3TCueR3yij5',
       apiSecretKey: 'WSdEyx3480Rc3RZGn4cgoBUMjW2FQASaLZlxFUr6MBE7moLzNX',
@@ -153,77 +143,85 @@ class _MyAppState extends State<MyApp> {
   }
 */
 
-  Future<Resource?> signInWithFacebook() async {
-    try {
-      final LoginResult result = await FacebookAuth.instance.login();
-      switch (result.status) {
-        case LoginStatus.success:
-          print('====== Login success ======');
-          final AuthCredential facebookCredential =
-          FacebookAuthProvider.credential(result.accessToken!.token);
-          final userCredential =await FirebaseAuth.instance.signInWithCredential(facebookCredential);
-       //   await _auth.signInWithCredential(facebookCredential);
-          return Resource(status: Status.Success);
-        case LoginStatus.cancelled:
-          print('====== Login cancel ======');
-          return Resource(status: Status.Cancelled);
-        case LoginStatus.failed:
-          print('====== Login fail ======');
-          return Resource(status: Status.Error);
-        default:
-          return null;
-      }
-    } on FirebaseAuthException catch (e) {
-      throw e;
-    }
-  }
-  Future<UserCredential> signInWithFaceboo() async {
-    final LoginResult loginResult = await FacebookAuth.instance.login();
-    // if(loginResult.status==LoginStatus.success){
-    //   AccessToken? mytoken=loginResult.accessToken;
-    //   print("token"+mytoken!.token);
-    // }
 
-    //     permissions : ['email', 'public_profile'],
-    //     loginBehavior : LoginBehavior.dialogOnly
-    // );
-    // permissions: ['email', 'public_profile', 'user_birthday', 'user_friends', 'user_gender', 'user_link']);
-    // ).then((value){
-    //   FacebookAuth.instance.getUserData().then((value){
-    //     setState(() {
-    //       print("isloggedtrue");
-    //       _isLoggedIn=true;
-    //     });
-    //   });
-    //   return value;
-    // });
+ Future<UserCredential> signInWithGoogle() async {
+    // Trigger the authentication flow
+    final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();  //await GoogleSignIn().signIn();
 
-/*  if (loginResult.status == LoginStatus.success) {
-     userData = await FacebookAuth.i.getUserData(
-      fields: "name,email,picture.width(200),birthday,friends,gender,link",
+    // Obtain the auth details from the request
+    final GoogleSignInAuthentication googleAuth = await googleUser!.authentication;
+
+    // Create a new credential
+    final credential = GoogleAuthProvider.credential(
+      accessToken: googleAuth.accessToken,
+      idToken: googleAuth.idToken,
     );
-     print("login success");
-  }
-  if(loginResult.status==LoginStatus.failed){
-    print("login failed");
-  }
-  if(loginResult.status==LoginStatus.cancelled){
-    print("login cancel");
-  }*/
 
-    print("token valuee      .......");
-    //   print(loginResult.accessToken!.token);
-    // print(loginResult.accessToken.token);
-    // Create a credential from the access token
-    final OAuthCredential facebookAuthCredential = FacebookAuthProvider.credential(loginResult.accessToken!.token);
+       var result=await FirebaseAuth.instance.signInWithCredential(credential);
+       _user =result.user;
 
-    // Once signed in, return the UserCredential
-    return FirebaseAuth.instance.signInWithCredential(facebookAuthCredential);
+        googleUsername=_user.displayName.toString();
+        googleUsermail=_user.email.toString();
+        print("username"+googleUsername);
+        print("User Name: ${_user.displayName}");
+        print("User Email ${_user.email}");
+
+    if(_user!=null){
+      setState(() {
+        googlelogin=true;
+      });
+    }
+     return _user;
+
   }
+
+
+
+  // signout
+
+  Future<void> signOutFromGoogle() async{
+    await GoogleSignIn().signOut();
+    await FirebaseAuth.instance.signOut();
+    print("google logout true");
+  }
+
+  Future<void> signOutFromFacebook() async{
+    await FacebookAuth.instance.logOut();
+    await FirebaseAuth.instance.signOut();
+    print(" Facebook logout true");
+  }
+
+
+  // Future<Resource?> signInWithFaceboo() async {
+  //   try {
+  //     final LoginResult result = await FacebookAuth.instance.login();
+  //     switch (result.status) {
+  //       case LoginStatus.success:
+  //         print('====== Login success ======');
+  //         final AuthCredential facebookCredential =
+  //         FacebookAuthProvider.credential(result.accessToken!.token);
+  //         final userCredential =await FirebaseAuth.instance.signInWithCredential(facebookCredential);
+  //         //   await _auth.signInWithCredential(facebookCredential);
+  //         return Resource(status: Status.Success);
+  //       case LoginStatus.cancelled:
+  //         print('====== Login cancel ======');
+  //         return Resource(status: Status.Cancelled);
+  //       case LoginStatus.failed:
+  //         print('====== Login fail ======');
+  //         return Resource(status: Status.Error);
+  //       default:
+  //         return null;
+  //     }
+  //   } on FirebaseAuthException catch (e) {
+  //     throw e;
+  //   }
+  // }
+
+
 }
 
-class Resource{
 
+class Resource{
   final Status status;
   Resource({required this.status});
 }
