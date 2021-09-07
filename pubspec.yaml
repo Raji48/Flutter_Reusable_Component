@@ -31,6 +31,7 @@ dependencies:
   flutter_facebook_auth: ^3.5.1
   firebase_auth: ^3.0.2
   google_sign_in: ^5.0.7
+  twitter_login: ^4.0.1
   auth_buttons: ^1.0.1+4
 
 

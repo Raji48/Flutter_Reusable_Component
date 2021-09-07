@@ -18,8 +18,50 @@
 	<string>$(FLUTTER_BUILD_NAME)</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
+	<!-- Put me in the [my_project]/ios/Runner/Info.plist file -->
+    <!-- Google Sign-in Section -->
+    <key>CFBundleURLTypes</key>
+    <array>
+    	<dict>
+    		<key>CFBundleTypeRole</key>
+    		<string>Editor</string>
+    		<key>CFBundleURLSchemes</key>
+    		<array>
+
+    		 <string>fb386438076249955</string>
+    			<string>com.googleusercontent.apps.735479346466-1nlmeh25jiljcofr6m1oer629j3efin7</string>
+
+    		</array>
+    	</dict>
+    </array>
+    <!-- End of the Google Sign-in Section -->
 	<key>CFBundleVersion</key>
 	<string>$(FLUTTER_BUILD_NUMBER)</string>
+	<key>FacebookAppID</key>
+    	<string>386438076249955</string>
+    	<key>FacebookDisplayName</key>
+    	<string>socialauthapp</string>
+
+<key>LSApplicationQueriesSchemes</key>
+<array>
+  <string>fbapi</string>
+  <string>fbapi20130214</string>
+  <string>fbapi20130410</string>
+  <string>fbapi20130702</string>
+  <string>fbapi20131010</string>
+  <string>fbapi20131219</string>
+  <string>fbapi20140410</string>
+  <string>fbapi20140116</string>
+  <string>fbapi20150313</string>
+  <string>fbapi20150629</string>
+  <string>fbapi20160328</string>
+  <string>fbauth</string>
+  <string>fb-messenger-share-api</string>
+  <string>fbauth2</string>
+  <string>fbshareextension</string>
+</array>
+
+
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>UILaunchStoryboardName</key>
