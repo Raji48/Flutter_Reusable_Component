@@ -1,21 +1,17 @@
 
+import 'package:auth_buttons/auth_buttons.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
+ import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
+ import 'package:google_sign_in/google_sign_in.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
-import 'package:google_sign_in/google_sign_in.dart';
-
 
 Future<void>main()async{
-  WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp();
+ // WidgetsFlutterBinding.ensureInitialized();
+ // await Firebase.initializeApp();
   runApp(MyApp());
 }
 
-// void main(){
-//   runApp(MyApp());
-//
-// }
 
 class MyApp extends StatefulWidget {
   @override
@@ -29,19 +25,48 @@ class _MyAppState extends State<MyApp> {
   bool googlelogin=false;
   String  googleUsername='';
   String googleUsermail='';
-  Map User={};
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
-          title: const Text('Plugin example app'),
+          title: const Text('Social Auth'),
         ),
         body: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
+           // Text("ios module"),
+           /*GoogleAuthButton(
+              onPressed: () {},
+              darkMode: false,
+              style: AuthButtonStyle(
+                buttonType: AuthButtonType.secondary,
+                iconType: AuthIconType.outlined,
+              ),
+            ),
+            const Divider(),
+            FacebookAuthButton(
+              onPressed: () {},
+              darkMode: false,
+             // isLoading: isLoading,
+              style: const AuthButtonStyle(
+                buttonType: AuthButtonType.secondary,
+                iconType: AuthIconType.outlined,
+              ),
+            ),
+            const Divider(),
+            TwitterAuthButton(
+              onPressed: () {},
+              darkMode: false,
+              isLoading: false,
+              style: const AuthButtonStyle(
+                buttonType: AuthButtonType.secondary,
+                iconType: AuthIconType.outlined,
+              ),
+            ),
+*/
             Container(
               child: _isLoggedIn?Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
@@ -104,8 +129,8 @@ class _MyAppState extends State<MyApp> {
                       color: Colors.black54,
                       fontWeight: FontWeight.w600,
                     ),),
-                  onPressed: (){
-                    signInWithGoogle();
+                  onPressed: () async {
+                    await   signInWithGoogle();
                   },
                 ),
               ),
@@ -172,13 +197,11 @@ class _MyAppState extends State<MyApp> {
       });
     }
      return _user;
-
   }
 
 
 
   // signout
-
   Future<void> signOutFromGoogle() async{
     await GoogleSignIn().signOut();
     await FirebaseAuth.instance.signOut();
@@ -216,8 +239,6 @@ class _MyAppState extends State<MyApp> {
   //     throw e;
   //   }
   // }
-
-
 }
 
 
@@ -231,6 +252,4 @@ enum Status {
   Error,
   Cancelled
 }
-
-
 
