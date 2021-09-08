@@ -40,32 +40,12 @@ class _MyAppState extends State<MyApp> {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-           // Text("ios module"),
-           /*GoogleAuthButton(
-              onPressed: () {},
-              darkMode: false,
-              style: AuthButtonStyle(
-                buttonType: AuthButtonType.secondary,
-                iconType: AuthIconType.outlined,
-              ),
-            ),
-            const Divider(),
-            FacebookAuthButton(
-              onPressed: () {},
-              darkMode: false,
-             // isLoading: isLoading,
-              style: const AuthButtonStyle(
-                buttonType: AuthButtonType.secondary,
-                iconType: AuthIconType.outlined,
-              ),
-            ),*/
             const Divider(),
         Container(
           child: twitterlog?Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children:[
                Text("Username: "+twitterusername),
-               // Text("Usermail: "+googleUsermail),
                 TextButton(onPressed: (){
                   setState(() {
                     twitterlog=false;
@@ -166,42 +146,13 @@ class _MyAppState extends State<MyApp> {
     );
   }
 
-  /*Future login() async {
-    final twitterLogin = TwitterLogin(
-      apiKey: 'eA71Q6zMCA923p3TCueR3yij5',
-      apiSecretKey: 'WSdEyx3480Rc3RZGn4cgoBUMjW2FQASaLZlxFUr6MBE7moLzNX',
-      redirectURI: 'https://twitterlogin-73c8f.firebaseapp.com/__/auth/handler',
-    );
-    final authResult = await twitterLogin.login();
-    switch (authResult.status) {
-      case TwitterLoginStatus.loggedIn:
-        print(authResult.user!.name.toString());
-        print(authResult.user!.email.toString());
-        // success
-        print('====== Login success ======');
-        break;
-      case TwitterLoginStatus.cancelledByUser:
-      // cancel
-        print('====== Login cancel ======');
-        break;
-      case TwitterLoginStatus.error:
-      case null:
-      // error
-        print('====== Login error ======');
-        break;
-    }
-  }
-*/
 
 
  Future<UserCredential> signInWithGoogle() async {
-    // Trigger the authentication flow
-    final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();  //await GoogleSignIn().signIn();
+    final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
 
-    // Obtain the auth details from the request
     final GoogleSignInAuthentication googleAuth = await googleUser!.authentication;
 
-    // Create a new credential
     final credential = GoogleAuthProvider.credential(
       accessToken: googleAuth.accessToken,
       idToken: googleAuth.idToken,
@@ -226,43 +177,13 @@ class _MyAppState extends State<MyApp> {
 
 
 
-  // signout
-  Future<void> signOutFromGoogle() async{
-    await GoogleSignIn().signOut();
-    await FirebaseAuth.instance.signOut();
-    print("google logout true");
-  }
-
-  Future<void> signOutFromFacebook() async{
-    await FacebookAuth.instance.logOut();
-    await FirebaseAuth.instance.signOut();
-    print(" Facebook logout true");
-  }
-
-  Future<void> signOuttwitter() async{
-    await FirebaseAuth.instance.signOut();
-
-  }
-
 
   Future twitterlogin() async {
     final twitterLogin = TwitterLogin(
-      /// Consumer API keys
       apiKey: 'eA71Q6zMCA923p3TCueR3yij5',
-
-      /// Consumer API Secret keys
       apiSecretKey: 'WSdEyx3480Rc3RZGn4cgoBUMjW2FQASaLZlxFUr6MBE7moLzNX',
-
-      /// Registered Callback URLs in TwitterApp
-      /// Android is a deeplink
-      /// iOS is a URLScheme
       redirectURI: 'soucialauthapp://',//'https://soucialauthapp.firebaseapp.com/__/auth/handler',
     );
-
-    /// Forces the user to enter their credentials
-    /// to ensure the correct users account is authorized.
-    /// If you want to implement Twitter account switching, set [force_login] to true
-    /// login(forceLogin: true);
     final authResult = await twitterLogin.login();
     switch (authResult.status) {
       case TwitterLoginStatus.loggedIn:
@@ -286,41 +207,24 @@ class _MyAppState extends State<MyApp> {
     }
   }
 
-  // Future<Resource?> signInWithFaceboo() async {
-  //   try {
-  //     final LoginResult result = await FacebookAuth.instance.login();
-  //     switch (result.status) {
-  //       case LoginStatus.success:
-  //         print('====== Login success ======');
-  //         final AuthCredential facebookCredential =
-  //         FacebookAuthProvider.credential(result.accessToken!.token);
-  //         final userCredential =await FirebaseAuth.instance.signInWithCredential(facebookCredential);
-  //         //   await _auth.signInWithCredential(facebookCredential);
-  //         return Resource(status: Status.Success);
-  //       case LoginStatus.cancelled:
-  //         print('====== Login cancel ======');
-  //         return Resource(status: Status.Cancelled);
-  //       case LoginStatus.failed:
-  //         print('====== Login fail ======');
-  //         return Resource(status: Status.Error);
-  //       default:
-  //         return null;
-  //     }
-  //   } on FirebaseAuthException catch (e) {
-  //     throw e;
-  //   }
-  // }
-}
+  // signout
+  Future<void> signOutFromGoogle() async{
+    await GoogleSignIn().signOut();
+    await FirebaseAuth.instance.signOut();
+    print("google logout true");
+  }
+
+  Future<void> signOutFromFacebook() async{
+    await FacebookAuth.instance.logOut();
+    await FirebaseAuth.instance.signOut();
+    print(" Facebook logout true");
+  }
+
+  Future<void> signOuttwitter() async{
+    await FirebaseAuth.instance.signOut();
+
+  }
 
 
-class Resource{
-  final Status status;
-  Resource({required this.status});
-}
-
-enum Status {
-  Success,
-  Error,
-  Cancelled
 }
 
