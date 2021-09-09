@@ -101,7 +101,7 @@ class _LoginState extends State<Login> {
           Center(
             child:Container(
               padding: EdgeInsets.only(top: getDeviceheight(context, 0.1)),
-              child: Text("Social Media Logi",style: TextStyle(fontSize: 36,fontWeight: FontWeight.bold),),),
+              child: Text("Social Media Login",style: TextStyle(fontSize: 36,fontWeight: FontWeight.bold),),),
             ),
           Container(
             padding: EdgeInsets.only(top: getDeviceheight(context, 0.05),left: fixsize),
