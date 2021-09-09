@@ -63,24 +63,24 @@ isEmpty(text) {
 }
 
 isvalidateEmail(mail) {
-  Pattern  pattern = r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+";
+  String  pattern = r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+";
   RegExp regExp = new RegExp(pattern);
   return regExp.hasMatch(mail);
 }
 
 isvalidateName(text) {
-  Pattern  pattern = r"^[a-zA-Z](\/?[0-9a-z])*";
+  String  pattern = r"^[a-zA-Z](\/?[0-9a-z])*";
   RegExp regExp = new RegExp(pattern);
   return regExp.hasMatch(text);
 }
 
 isValidPassword(text) {
-  Pattern pattern = r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{8,}$';
+  String pattern = r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{8,}$';
   RegExp regExp = new RegExp(pattern);
   return regExp.hasMatch(text);
 }
 isValidNumber(text){
-  Pattern pattern=r'^([1-9][0-9]*)';
+  String pattern=r'^([1-9][0-9]*)';
   RegExp regExp =RegExp(pattern);
   return regExp.hasMatch(text);
 }

@@ -1,5 +1,5 @@
 
-import 'package:expensesapproval/res/colors.dart';
+
 import 'package:flutter/material.dart';
 
 class CustomButtom extends StatefulWidget {
@@ -40,7 +40,7 @@ class _CustomeButtom extends State<CustomButtom> {
                           Text(widget.btnName,
                             style: TextStyle(fontFamily: 'Work Sans', color: widget.txtColor, fontSize: 16,fontWeight: FontWeight.bold),
                           ),
-                          (widget.icon!=null)? Icon(widget.icon,color: white,size: 16.0,):Container()
+                          (widget.icon!=null)? Icon(widget.icon,color: Colors.white,size: 16.0,):Container()
 //                          widget.showIcon ? (SizedBox(width: 40)) : Container(),
 //                          widget.showIcon ? (Icon(Icons.arrow_forward, size: 30, color: white,)) : Container()
                         ]
