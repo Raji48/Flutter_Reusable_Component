@@ -2,8 +2,8 @@
 import 'package:auth_buttons/auth_buttons.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
- import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
- import 'package:google_sign_in/google_sign_in.dart';
+import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:flutter/material.dart';
 import 'package:socialauthapp/component/textfield.dart';
 import 'package:twitter_login/twitter_login.dart';
@@ -150,8 +150,8 @@ class _MyAppState extends State<MyApp> {
                       buttonType: AuthButtonType.secondary,
                       iconType: AuthIconType.outlined,
                     ),
-                    onPressed: (){
-                   //    signInWithFacebook();
+                    onPressed: () async {
+                 //  await  signInWithFacebook();
                       FacebookAuth.instance.login().then((value){
                         FacebookAuth.instance.getUserData().then((userData){
                           setState(() {
@@ -248,6 +248,31 @@ class _MyAppState extends State<MyApp> {
      return _user;
   }
 
+Future signInWithFacebook() async {
+  try {
+    final LoginResult result = await FacebookAuth.instance.login();
+    switch (result.status) {
+      case LoginStatus.success:
+        print('====== Login success ======');
+        final AuthCredential facebookCredential =
+        FacebookAuthProvider.credential(result.accessToken!.token);
+        final userCredential =await FirebaseAuth.instance.signInWithCredential(facebookCredential);
+        //   await _auth.signInWithCredential(facebookCredential);
+      //   return Resource(status: Status.Success);
+      // case LoginStatus.cancelled:
+      //   print('====== Login cancel ======');
+      //   return Resource(status: Status.Cancelled);
+      // case LoginStatus.failed:
+      //   print('====== Login fail ======');
+      //   return Resource(status: Status.Error);
+      // default:
+        return null;
+    }
+  } on FirebaseAuthException catch (e) {
+    throw e;
+  }
+}
+
 
 
 
@@ -255,7 +280,7 @@ class _MyAppState extends State<MyApp> {
     final twitterLogin = TwitterLogin(
       apiKey: 'eA71Q6zMCA923p3TCueR3yij5',
       apiSecretKey: 'WSdEyx3480Rc3RZGn4cgoBUMjW2FQASaLZlxFUr6MBE7moLzNX',
-      redirectURI: 'soucialauthapp://',//'https://soucialauthapp.firebaseapp.com/__/auth/handler',
+      redirectURI: 'https://soucialauthapp.firebaseapp.com/__/auth/handler', //'soucialauthapp://',//ios
     );
     final authResult = await twitterLogin.login();
     switch (authResult.status) {
