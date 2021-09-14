@@ -75,8 +75,6 @@ class _MyAppState extends State<MyApp> {
         },child: Padding(
           padding: const EdgeInsets.all(8.0),
           child: Column(
-            //mainAxisAlignment: MainAxisAlignment.center,
-           // crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               SizedBox(height: 80,),
               Center(
