@@ -64,6 +64,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.0.3"
+  dio:
+    dependency: "direct main"
+    description:
+      name: dio
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "4.0.0"
   fake_async:
     dependency: transitive
     description:
@@ -240,6 +247,20 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "3.0.1"
+  simple_auth:
+    dependency: "direct main"
+    description:
+      name: simple_auth
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "2.0.10"
+  simple_auth_flutter:
+    dependency: "direct main"
+    description:
+      name: simple_auth_flutter
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "2.0.11"
   sky_engine:
     dependency: transitive
     description: flutter

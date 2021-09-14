@@ -33,6 +33,9 @@ dependencies:
   google_sign_in: ^5.0.7
   twitter_login: ^4.0.1
   auth_buttons: ^1.0.1+4
+  simple_auth: ^2.0.10
+  dio: ^4.0.0
+  simple_auth_flutter: ^2.0.11
 
 
 dev_dependencies:
