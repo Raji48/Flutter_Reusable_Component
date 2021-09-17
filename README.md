@@ -8,14 +8,14 @@
 
 Dependencies:
 
-`flutter_facebook_auth: ^3.5.1
+```flutter_facebook_auth: ^3.5.1
 firebase_auth: ^3.0.2
 google_sign_in: ^5.0.7
 twitter_login: ^4.0.1
 auth_buttons: ^1.0.1+4
 simple_auth: ^2.0.10
 dio: ^4.0.0
-simple_auth_flutter: ^2.0.11`
+simple_auth_flutter: ^2.0.11```
 
 To get started with Firebase Auth for Flutter, please see the documentation.
 To learn more about Firebase, please visit the Firebase website
