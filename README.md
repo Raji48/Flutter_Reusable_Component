@@ -8,7 +8,7 @@ A new Flutter project.
 ![sociallogin](https://user-images.githubusercontent.com/75483357/133731467-ba093044-dc53-4806-9011-f2fdc89ed77b.gif)
 
 
-######Dependencies:
+##Dependencies:
 
 `flutter_facebook_auth: ^3.5.1
 firebase_auth: ^3.0.2
@@ -18,3 +18,11 @@ auth_buttons: ^1.0.1+4
 simple_auth: ^2.0.10
 dio: ^4.0.0
 simple_auth_flutter: ^2.0.11`
+
+ <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <data android:scheme="https"
+                    android:host="soucialauthapp.firebaseapp.com" />
+            </intent-filter>
