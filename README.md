@@ -1,14 +1,5 @@
 # socialauthapp
 
-A new Flutter project.
-<intent-filter>
-                <action android:name="android.intent.action.VIEW" />
-                <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="android.intent.category.BROWSABLE" />
-                <data android:scheme="https"
-                    android:host="soucialauthapp.firebaseapp.com" />
-            </intent-filter>
-
 ## Getting Started
 
 ## **Flutter Social_Login**
