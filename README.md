@@ -88,8 +88,8 @@ Container(
 
 Future twitterlogin() async {
   final twitterLogin = TwitterLogin(
-    apiKey: 'eA71Q6zMCA923p3TCueR3yij5',
-    apiSecretKey: 'WSdEyx3480Rc3RZGn4cgoBUMjW2FQASaLZlxFUr6MBE7moLzNX',
+    apiKey: 'eA71Q6zMCA923p3TCueR3yij5', // Generated api key
+    apiSecretKey: 'WSdEyx3480Rc3RZGn4cgoBUMjW2FQASaLZlxFUr6MBE7moLzNX', //Generated secretkey
     redirectURI: 'https://soucialauthapp.firebaseapp.com/__/auth/handler', //'soucialauthapp://'  for ios redirectURI
   );
   final authResult = await twitterLogin.login();
@@ -115,3 +115,4 @@ Future twitterlogin() async {
   }
 }
 ```
+# Facebook Configuration 
