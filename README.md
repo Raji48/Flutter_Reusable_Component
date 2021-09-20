@@ -11,7 +11,7 @@
  
  To learn more about Firebase, please visit the "Firebase website".
  
- To complete Firebase configuration for both Android and IOS.Then enable twitter ,Facebook, Google Sign-in providers in authentication.
+ To complete Firebase configuration for both Android and IOS.Then enable **twitter ,Facebook, Google** Sign-in providers in authentication.
  
 ```
 flutter_facebook_auth: ^3.5.1
