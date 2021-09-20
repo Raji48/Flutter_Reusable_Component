@@ -18,9 +18,7 @@ simple_auth_flutter: ^2.0.11
 ```
 
  To get started with Firebase Auth for Flutter and Flutter Firebase configuration.
- 
  To learn more about Firebase, please visit the "Firebase website".
- 
  To complete Firebase configuration for both Android and IOS.Then enable twitter ,Facebook, Google Sign-in providers in authentication.
 
 # Twitter Configuration 
@@ -119,9 +117,9 @@ Future twitterlogin() async {
 ```
 # Facebook Configuration 
 
- Edit Your Resources and Manifest add this config in your android project.
- Open your /android/app/src/main/res/values/strings.xml file, or create one if it doesn't exists.
- Add the Following code to strings.xml.
+  Edit Your Resources and Manifest add this config in your android project.
+  Open your /android/app/src/main/res/values/strings.xml file, or create one if it doesn't exists.
+  Add the Following code to strings.xml.
  
 ## Android Integration 
 ```
@@ -155,4 +153,5 @@ Add the following meta-data element, an activity for Facebook, and an activity a
      </intent-filter>
  </activity>
 ```
+
 ## IOS Integration 
