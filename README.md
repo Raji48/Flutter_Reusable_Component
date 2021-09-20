@@ -19,8 +19,9 @@ dio: ^4.0.0
 simple_auth_flutter: ^2.0.11
 ```
 
- To get started with Firebase Auth for Flutter, please [see the documentation].
+ To get started with Firebase Auth for Flutter and Flutter Firebase configuration.
  To learn more about Firebase, please visit the "Firebase website".
  To complete Firebase configuration for both Android and IOS.Then enable twitter ,Facebook, Google Sign-in providers in authentication.
 
-
+# Twitter Configuration 
+## Android Integration 
