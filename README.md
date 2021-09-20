@@ -35,3 +35,22 @@ simple_auth_flutter: ^2.0.11
         android:host="soucialauthapp.firebaseapp.com" />
 </intent-filter>
 ```
+## IOS Integration 
+Add URLScheme with this example in  ios/Runner/Info.plist
+```
+<key>CFBundleURLTypes</key>
+<array>
+  <dict>
+    <key>CFBundleTypeRole</key>
+    <string>Editor</string>
+    <key>CFBundleURLName</key>
+    <string></string>
+    <key>CFBundleURLSchemes</key>
+    <array>
+      <!-- Registered Callback URLs in TwitterApp -->
+      <string>'soucialauthapp://'</string>
+    </array>
+  </dict>
+</array>
+```
+### Example code
