@@ -1,7 +1,5 @@
 # socialauthapp
 
-## Getting Started
-
 ## **Flutter Social_Login**
 
 
@@ -25,3 +23,15 @@ simple_auth_flutter: ^2.0.11
 
 # Twitter Configuration 
 ## Android Integration 
+ 
+ Add the intent filters in  android/app/src/main/AndroidManifest.xml
+ 
+ ```
+ <intent-filter>
+    <action android:name="android.intent.action.VIEW" />
+    <category android:name="android.intent.category.DEFAULT" />
+    <category android:name="android.intent.category.BROWSABLE" />
+    <data android:scheme="https"
+        android:host="soucialauthapp.firebaseapp.com" />
+</intent-filter>
+```
