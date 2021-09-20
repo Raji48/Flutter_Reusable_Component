@@ -116,3 +116,39 @@ Future twitterlogin() async {
 }
 ```
 # Facebook Configuration 
+
+Edit Your Resources and Manifest add this config in your android project.
+Open your /android/app/src/main/res/values/strings.xml file, or create one if it doesn't exists.
+Add the Following code to strings.xml.
+
+```
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="app_name">Flutter Facebook Auth Example</string>
+  <string name="facebook_app_id">1365719610250300</string>
+  <string name="fb_login_protocol_scheme">fb1365719610250300</string>
+</resources>
+```
+
+Add the following uses-permission element after the application element in /android/app/src/main/AndroidManifest.xml file.
+```
+<uses-permission android:name="android.permission.INTERNET"/>
+```
+Add the following meta-data element, an activity for Facebook, and an activity and intent filter for Chrome Custom Tabs inside your application element
+
+<meta-data android:name="com.facebook.sdk.ApplicationId" android:value="@string/facebook_app_id"/>
+```
+ <activity android:name="com.facebook.FacebookActivity"
+     android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"
+     android:label="@string/app_name" />
+ <activity
+     android:name="com.facebook.CustomTabActivity"
+     android:exported="true">
+     <intent-filter>
+         <action android:name="android.intent.action.VIEW" />
+         <category android:name="android.intent.category.DEFAULT" />
+         <category android:name="android.intent.category.BROWSABLE" />
+         <data android:scheme="@string/fb_login_protocol_scheme" />
+     </intent-filter>
+ </activity>
+```
