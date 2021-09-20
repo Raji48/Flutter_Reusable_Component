@@ -201,4 +201,49 @@ your application's Info.plist also needs to include:
 </array>
 ```
 
+### Example code
+
+```
+//facebook Login
+              Container(
+                child: _isLoggedIn?Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                    children:[
+                      //  Image.network("src"),
+                    if(_userObj["email"]!=null)Text("user email id:"+_userObj["email"]),//:Text("email not link"),
+                      Text("user name :"+_userObj["name"]),
+                      TextButton(onPressed: (){
+                        signOutFromFacebook();
+                        setState(() {
+                          _isLoggedIn=false;
+                          _userObj={};
+                        });
+                      }, child:Text("Logout"))
+                    ]
+                ):
+                Center(
+                  child:
+                  FacebookAuthButton(
+                    darkMode: false,
+                    // isLoading: isLoading,
+                    style: const AuthButtonStyle(
+                      buttonType: AuthButtonType.secondary,
+                      iconType: AuthIconType.outlined,
+                    ),
+                    onPressed: () async {
+                  //await  signInWithFacebook();
+                      FacebookAuth.instance.login().then((value){
+                        FacebookAuth.instance.getUserData().then((userData){
+                          setState(() {
+                            print("isloggedtrue");
+                            _isLoggedIn=true;
+                            _userObj=userData;
+                          });
+                        });
+                      });
+                    },
+                  ),
+                ),
+              ),
+              ```
 
