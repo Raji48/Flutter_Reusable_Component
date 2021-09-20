@@ -245,5 +245,38 @@ your application's Info.plist also needs to include:
                   ),
                 ),
               ),
+              
               ```
+              
+# Google Configuration 
+
+## Android Integration 
+
+To access Google Sign-In, you'll need to make sure to register your application.
+
+now we need to skip this android Integration. we already configured project with firebase and also enabled google sign in method .
+
+It' more than enough for android integration for google configuration.
+
+## IOS Integration 
+
+add the CFBundleURLTypes attributes below into the /ios/Runner/Info.plist file.
+
+
+```
+<key>CFBundleURLTypes</key>
+<array>
+	<dict>
+		<key>CFBundleTypeRole</key>
+		<string>Editor</string>
+		<key>CFBundleURLSchemes</key>
+		<array>
+			<!-- TODO Replace this value: -->
+			<!-- Copied from GoogleService-Info.plist key REVERSED_CLIENT_ID -->
+			<string>com.googleusercontent.apps.861823949799-vc35cprkp249096uujjn0vvnmcvjppkn</string>
+		</array>
+	</dict>
+</array>
+```
+
 
