@@ -340,4 +340,53 @@ add the CFBundleURLTypes attributes below into the /ios/Runner/Info.plist file.
      return _user;
   }
 ```
+# Instagram Configuration 
 
+### Example code
+
+```
+ //Instagram Login
+              Visibility(
+                visible: _userData.isNotEmpty,
+                child: Text(
+                  _userData.toString(), // TODO pass values string here
+                  textAlign: TextAlign.center,
+                ),
+                //replacement:
+               // Text("Click the button below to get Instagram Login."),
+              ),
+              FlatButton.icon(
+                icon: Icon(Icons.input),
+                label: Text("Signin with Instagram",),
+                onPressed: _instagramlogin,
+                color: Colors.pink.shade400,
+              ),
+//instagramlogin method
+
+Future<void> _instagramlogin() async {
+    _igApi.authenticate().then(
+          (simpleAuth.Account? _user) async {
+        simpleAuth.OAuthAccount? user = _user as simpleAuth.OAuthAccount?;
+        var igUserResponse = await Dio(BaseOptions(baseUrl: 'https://graph.instagram.com')).get(
+          '/me',
+          queryParameters: {
+            // Get the fields you need.
+            // https://developers.facebook.com/docs/instagram-basic-display-api/reference/user
+            "fields": "username,id,account_type,media_count",
+            "access_token": _user!.token,
+          },
+        );
+        print("hi access token is here" + _user.token.toString());
+        setState(() {
+          _userData = igUserResponse.data;
+          _errorMsg = "";
+        });
+      },
+    ).catchError(
+          (Object e) {
+        setState(() => _errorMsg = e.toString());
+        print(_errorMsg);
+      },
+    );
+  }
+```
