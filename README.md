@@ -119,13 +119,13 @@ Future twitterlogin() async {
 ```
 # Facebook Configuration 
 
+## Android Integration 
   Edit Your Resources and Manifest add this config in your android project.
   
   Open your /android/app/src/main/res/values/strings.xml file, or create one if it doesn't exists.
   
   Add the Following code to strings.xml.
  
-## Android Integration 
 ```
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
@@ -161,3 +161,44 @@ Add the following meta-data element, an activity for Facebook, and an activity a
 ```
 
 ## IOS Integration 
+
+need configure your Info.plist file inside ios/Runner/Info.plist
+
+```
+<key>CFBundleURLTypes</key>
+<array>
+  <dict>
+    <key>CFBundleTypeRole</key>
+    <string>Editor</string>
+    <key>CFBundleURLSchemes</key>
+    <array>
+      <string>fb{your-app-id}</string>
+      <string>com.googleusercontent.apps.{your-app-specific-url}</string>
+    </array>
+  </dict>
+</array>
+```
+your application's Info.plist also needs to include: 
+
+```
+<key>LSApplicationQueriesSchemes</key>
+<array>
+  <string>fbapi</string>
+  <string>fbapi20130214</string>
+  <string>fbapi20130410</string>
+  <string>fbapi20130702</string>
+  <string>fbapi20131010</string>
+  <string>fbapi20131219</string>
+  <string>fbapi20140410</string>
+  <string>fbapi20140116</string>
+  <string>fbapi20150313</string>
+  <string>fbapi20150629</string>
+  <string>fbapi20160328</string>
+  <string>fbauth</string>
+  <string>fb-messenger-share-api</string>
+  <string>fbauth2</string>
+  <string>fbshareextension</string>
+</array>
+```
+
+
