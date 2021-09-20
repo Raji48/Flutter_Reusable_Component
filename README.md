@@ -279,5 +279,65 @@ add the CFBundleURLTypes attributes below into the /ios/Runner/Info.plist file.
 	</dict>
 </array>
 ```
+### Example code
 
+```
+//Google Login
+              Container(
+                child: googlelogin?Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children:[
+                      Text("Username: "+googleUsername),
+                      Text("Usermail: "+googleUsermail),
+                      TextButton(onPressed: (){
+                        setState(() {
+                          googlelogin=false;
+                        });
+                        signOutFromGoogle();
+                      },child:
+                      Text("Logout"))
+                    ]
+                ):
+                Center(
+                  child:GoogleAuthButton(
+                    darkMode: false,
+                    style: AuthButtonStyle(
+                      buttonType: AuthButtonType.secondary,
+                      iconType: AuthIconType.outlined,
+                    ),
+                    onPressed: () async {
+                      await  signInWithGoogle();
+                    },
+                  ),
+                ),
+              ),
+	      
+	      //Signinwithgoogle Method
+	      
+	       Future<UserCredential> signInWithGoogle() async {
+    final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
+
+    final GoogleSignInAuthentication googleAuth = await googleUser!.authentication;
+
+    final credential = GoogleAuthProvider.credential(
+      accessToken: googleAuth.accessToken,
+      idToken: googleAuth.idToken,
+    );
+
+       var result=await FirebaseAuth.instance.signInWithCredential(credential);
+       _user =result.user;
+        googleUsername=_user.displayName.toString();
+        googleUsermail=_user.email.toString();
+        print("username"+googleUsername);
+        print("User Name: ${_user.displayName}");
+        print("User Email ${_user.email}");
+
+    if(_user!=null){
+      setState(() {
+        googlelogin=true;
+      });
+    }
+     return _user;
+  }
+```
 
