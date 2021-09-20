@@ -54,3 +54,64 @@ Add URLScheme with this example in  ios/Runner/Info.plist
 </array>
 ```
 ### Example code
+```
+//Twitter login
+Container(
+  child: twitterlog?Column(
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children:[
+       Text("Username: "+twitterusername),
+        TextButton(onPressed: (){
+          setState(() {
+            twitterlog=false;
+          });
+          signOuttwitter();
+        },child:
+        Text("Logout"))
+      ]
+  ):
+      Center(
+      child:
+    TwitterAuthButton(
+      onPressed: () async {
+        await twitterlogin();
+      },
+      darkMode: false,
+      //isLoading: false,
+      style: const AuthButtonStyle(
+        buttonType: AuthButtonType.secondary,
+        iconType: AuthIconType.outlined,
+      ),
+    ))),
+
+//Twitter login Method
+
+Future twitterlogin() async {
+  final twitterLogin = TwitterLogin(
+    apiKey: 'eA71Q6zMCA923p3TCueR3yij5',
+    apiSecretKey: 'WSdEyx3480Rc3RZGn4cgoBUMjW2FQASaLZlxFUr6MBE7moLzNX',
+    redirectURI: 'https://soucialauthapp.firebaseapp.com/__/auth/handler', //'soucialauthapp://'  for ios redirectURI
+  );
+  final authResult = await twitterLogin.login();
+  switch (authResult.status) {
+    case TwitterLoginStatus.loggedIn:
+    // success
+      print('====== Login success ======');
+      twitterusername=authResult.user!.name.toString();
+      print(authResult.user!.email.toString());
+      setState(() {
+        twitterlog=true;
+      });
+      break;
+    case TwitterLoginStatus.cancelledByUser:
+    // cancel
+      print('====== Login cancel ======');
+      break;
+    case TwitterLoginStatus.error:
+    case null:
+    // error
+      print('====== Login error ======');
+      break;
+  }
+}
+```
