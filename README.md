@@ -1,12 +1,12 @@
 # socialauthapp
 
-## **Flutter Social_Login**
+## **Flutter Social_Login Android and Ios Configuration**
 
 
 ![sociallogin](https://user-images.githubusercontent.com/75483357/133731467-ba093044-dc53-4806-9011-f2fdc89ed77b.gif)
 
+# Dependencies
 ```
-Dependencies:
 flutter_facebook_auth: ^3.5.1
 firebase_auth: ^3.0.2
 google_sign_in: ^5.0.7
