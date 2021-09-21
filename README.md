@@ -344,9 +344,19 @@ add the CFBundleURLTypes attributes below into the /ios/Runner/Info.plist file.
 ```
 # Instagram Configuration 
 
+To Register Application in facebook developer instagram login.
+we have to use Generated clientId and clientsecret key for created app.
+
 ### Example code
 
 ```
+  static const igClientId = "959584987944765";
+  static const igClientSecret = "387b6528566b8619fcfd4cddaee79b1f";
+  static const igRedirectURL = "https://soucialauthapp.firebaseapp.com/__/auth/handler";
+```
+
+```
+
  //Instagram Login
               Visibility(
                 visible: _userData.isNotEmpty,
@@ -391,4 +401,16 @@ Future<void> _instagramlogin() async {
       },
     );
   }
+  //InstagramApi call
+  
+   final simpleAuth.InstagramApi _igApi = simpleAuth.InstagramApi(
+    "instagram",
+    igClientId,
+    igClientSecret,
+    igRedirectURL,
+    scopes: [
+      'user_profile', // For getting username, account type, etc.
+      'user_media', // For accessing media count & data like posts, videos etc.
+    ],
+  );
 ```
