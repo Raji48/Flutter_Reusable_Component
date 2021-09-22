@@ -10,7 +10,6 @@ import 'package:wait4me/routes/route_generator.dart';
 import 'package:wait4me/services/ApiMiddleware.dart';
 
 
-
 final navigatorKey = GlobalKey<NavigatorState>();
 void main() {
   runApp(MyApp());

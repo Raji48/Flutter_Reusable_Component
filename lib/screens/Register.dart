@@ -14,17 +14,21 @@ class _RegisterState extends State<Register> {
     return Scaffold(
         backgroundColor: Colors.white,
         resizeToAvoidBottomInset: true,
-        body:
-        Stack(
+        body: Stack(
         children: [
         GestureDetector(
         onTap: () {
-      FocusScope.of(context).unfocus();
-    },
-    child: SafeArea(
-    child: SingleChildScrollView(
-          child: Center(child: Text("Texttt"))),
-    ))
+          FocusScope.of(context).unfocus();
+        },
+            child:SafeArea(
+              child: SingleChildScrollView(
+
+              ),
+            )
+
+
+
+        )
     ])
     );
   }
