@@ -3,6 +3,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:wait4me/utills/styles.dart';
 
 class MyTextFormField extends StatefulWidget {
   String labelText;
@@ -71,10 +72,11 @@ class _MyTextFormFieldState extends State<MyTextFormField> {
         maxLength: widget.isnum?10:widget.isPassword?8:null,
         decoration: InputDecoration(
           labelText: widget.labelText,
+         labelStyle:widget.underlineborderDecoration?labelStylewhite:labelStylegrey,
          // hintText: widget.hintText,
           errorText: _textErrorValid ? (userName.isEmpty ? widget.errorText : widget.subErrorText) : null,
        //   contentPadding: EdgeInsets.all(15.0),
-        //  enabledBorder: widget.underlineborderDecoration?inlineborderstyle:borderstyle,
+         enabledBorder: widget.underlineborderDecoration?borderstyle:underlineborderstyle,
        //   filled: true,
           //  fillColor: Colors.grey[200],
           counterText: "",
@@ -91,7 +93,7 @@ class _MyTextFormFieldState extends State<MyTextFormField> {
         ),
         obscureText: widget.isPassword ? showPassword :false,
         onChanged: (text) {
-          _update(text, 1);
+          //_update(text, 1);
           if (text.isNotEmpty) {
             if (widget.regExp.hasMatch(text)) {
               setState(() {
@@ -156,33 +158,3 @@ class _MyTextFormFieldState extends State<MyTextFormField> {
   }
 }
 
-
-String? validatename(value){
-  if(value.isEmpty){
-    return "Please enter firstname";
-  }
-  return null;
-}
-
-
-String? validatepass(value){
-  if(value.isEmpty){
-    return "Please enter password";
-  } if(!RegExp( r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{6,}$').hasMatch(value)){
-    return "Password length should be 6-10,at least one upper case,\nlower case,digit and Special character";
-  }
-  else if(value.length<6){
-    return "Should be At Least 6 characters";
-  }else if(value.length>10) {
-    return "Should not be more than 10 characters";
-  }
-  return null;
-}
-
-final borderstyle=new OutlineInputBorder(borderSide: BorderSide(
-                 style: BorderStyle.solid, color: Colors.blue, width: 2.0),
-              borderRadius: const BorderRadius.all(const Radius.circular(0.0),),);
-
-
-// final inlineborderstyle=inlineborderstyle(borderSide: BorderSide(
-//     color:Colors.orangeAccent ,width: 1.3 ));

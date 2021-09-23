@@ -39,7 +39,7 @@ class _MyAppState extends State<MyApp> {
           //   return MediaQuery(data: MediaQuery.of(context).copyWith(textScaleFactor: 1.0), child:child);
           //   },
           navigatorKey: navigatorKey,
-          initialRoute: '/roleselect',
+          initialRoute: '/register',
           onGenerateRoute: RouteGenerator.generateRoute,
           debugShowCheckedModeBanner: false,
           //  home: Splash(),

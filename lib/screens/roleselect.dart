@@ -2,6 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:wait4me/res/index.dart';
 import 'package:wait4me/utills/dynamic_widthandheight.dart';
+import 'package:wait4me/utills/styles.dart';
 
 class RoleSelect extends StatefulWidget {
   const RoleSelect({Key? key}) : super(key: key);
@@ -20,7 +21,6 @@ class _RoleSelectState extends State<RoleSelect> {
           automaticallyImplyLeading: false,
           flexibleSpace: Container(
             decoration: BoxDecoration(
-              //  borderRadius: BorderRadius.only(bottomLeft: Radius.circular(20),bottomRight: Radius.circular(20)),
                 gradient: LinearGradient(
                     begin: Alignment.topCenter,
                     end: Alignment.bottomCenter,
@@ -31,7 +31,7 @@ class _RoleSelectState extends State<RoleSelect> {
             ),
           ),
           //  toolbarHeight: 100,
-          title: Text('SELECT ROLE TYPE'),
+          title: Text(selectroletype,style: titleStyle,),
         ),
       body:  SafeArea(
       child:Column(
@@ -45,10 +45,23 @@ class _RoleSelectState extends State<RoleSelect> {
                   });
                    },
              child: Container(
-                color:select?skyblue:white,
-                child: Center(
-                 child: Image(
-                    image: customer,)
+                color:skyblue,//select?skyblue:white,
+                child:Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                   // SizedBox(height: getDeviceheight(context,0.03),),
+                    Center(
+                    child: Container(
+                      // height: getDeviceheight(context,0.05),
+                       width: getDevicewidth(context,0.15),
+                     child: Image(
+                        image: customer,fit: BoxFit.cover,)
+                    ),
+                    ),
+                    SizedBox(height: getDeviceheight(context,0.15),),
+                    Text(customerr,style: titleStyle,)
+                  ],
                 ),
               )
               )
@@ -63,12 +76,21 @@ class _RoleSelectState extends State<RoleSelect> {
                     });
                 },
           child:Container(
-                color:!select?skyblue:white,
-                child: Center(
-                  child: Image(
-                    image: waiter,
-                  ),
-
+                color:white ,//!select?skyblue:white,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Center(
+                      child: Container(
+                          width: getDevicewidth(context,0.15),
+                          child: Image(
+                            image:waiter,fit: BoxFit.cover,)
+                      ),
+                    ),
+                    SizedBox(height: getDeviceheight(context,0.15),),
+                    Text(waiterr,style: TextStyle(fontSize: 16,fontFamily: 'Lato-Bold',color: greyblue),)
+                  ],
                 ),
               )
               )
