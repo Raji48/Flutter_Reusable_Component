@@ -47,7 +47,7 @@ class DrawerSlide extends StatelessWidget{
 
           ListTile(
             visualDensity: VisualDensity(horizontal:- 4, vertical: 4),
-            leading: Icon(Icons.pin_drop,color: Color.fromRGBO(144, 157, 167, 1)),
+            leading: Icon(Icons.pin_drop,color: Color.fromRGBO(144, 157, 167, 1),size: 21,),
             title: Text("Find Waiter", style: TextStyle(fontFamily: 'Lato-Bold', color: Color.fromRGBO(144, 157, 167, 1), fontSize: 18,)),
 
             onTap: () {

@@ -130,8 +130,8 @@ class _LoginState extends State<Login> {
                   left: getDevicewidth(context, 0.05),
                   right: getDevicewidth(context, 0.05),
                   bottom: getDeviceheight(context, 0.05)),
-              child: CustomButtom("Login", getDevicewidth(context, 0.9),
-                  getDeviceheight(context, 0.07), () {}),
+              child: CustomButtom(false,"Login", getDevicewidth(context, 0.9),
+                  getDeviceheight(context, 0.07), () {},false),
             ),
             Container(
                 child: InkWell(

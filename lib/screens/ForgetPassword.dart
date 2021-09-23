@@ -106,8 +106,7 @@ class _ForgetPasswordState extends State<ForgetPassword> {
                         fillColor: white))),
             Container(
               color: Colors.transparent,
-              child: CustomButtom("SEND", getDevicewidth(context, 0.4),
-                  getDeviceheight(context, 0.07), () {}),
+              child: CustomButtom(false,"SEND",getDevicewidth(context, 0.4),getDeviceheight(context, 0.07), () {},true),
             )
           ],
         ),
