@@ -1,12 +1,9 @@
-
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-
 class MyTextFormField extends StatefulWidget {
   String labelText;
-  String hintText;
+  // String hintText;
   bool isPassword=false;
   dynamic validator;
   bool isEmail=false;
@@ -18,13 +15,13 @@ class MyTextFormField extends StatefulWidget {
   dynamic nextFocusField;
   TextEditingController textcontroller;
   dynamic onTap;
-  bool isDatepicker;
+  // bool isDatepicker;
   RegExp regExp;
-
+  final bool underlineborderDecoration;
   MyTextFormField(
       this.textcontroller,
       this.labelText,
-      this.hintText,
+      // this.hintText,
       this.focusField,
       this.nextFocusField,
       this.inputformat,
@@ -35,14 +32,13 @@ class MyTextFormField extends StatefulWidget {
       this.errorText,
       this.subErrorText,
       this.onTap,
-      this.isDatepicker,
+      // this.isDatepicker,
       this.regExp,
+      this.underlineborderDecoration,
       );
-
   @override
   _MyTextFormFieldState createState() => _MyTextFormFieldState();
 }
-
 
 class _MyTextFormFieldState extends State<MyTextFormField> {
   bool _textErrorValid=false;
@@ -62,18 +58,19 @@ class _MyTextFormFieldState extends State<MyTextFormField> {
       //padding: EdgeInsets.all(8.0),
       // child:
       TextFormField(
-        readOnly: widget.isDatepicker,
+        //   readOnly: widget.isDatepicker,
         controller: widget.textcontroller,
         focusNode:widget.focusField,
         inputFormatters:widget.inputformat,
         maxLength: widget.isnum?10:widget.isPassword?8:null,
         decoration: InputDecoration(
           labelText: widget.labelText,
-          hintText: widget.hintText,
+          // hintText: widget.hintText,
           errorText: _textErrorValid ? (userName.isEmpty ? widget.errorText : widget.subErrorText) : null,
-          contentPadding: EdgeInsets.all(15.0),
-         // border: enableborder,
-          filled: true,
+          //   contentPadding: EdgeInsets.all(15.0),
+          enabledBorder: widget.underlineborderDecoration?null:borderstyle,
+          focusedBorder: widget.underlineborderDecoration?null:borderstyle,
+          //   filled: true,
           //  fillColor: Colors.grey[200],
           counterText: "",
           suffixIcon:
@@ -84,7 +81,6 @@ class _MyTextFormFieldState extends State<MyTextFormField> {
               });
             },
             icon:showPassword ? Icon(Icons.visibility_off,color:Colors.black26,):Icon(Icons.visibility,color: Colors.grey,),
-
           ):null,
         ),
         obscureText: widget.isPassword ? showPassword :false,
@@ -131,13 +127,11 @@ class _MyTextFormFieldState extends State<MyTextFormField> {
             FocusScope.of(context).requestFocus(widget.focusField);
           }
         },
-
         keyboardType: widget.isEmail ? TextInputType.emailAddress : widget.isnum?TextInputType.number:TextInputType.text,
         onTap: widget.onTap,
         validator: widget.validator,
       );
   }
-
   _update(text, type) {
     // if (widget.validateName(text)) {
     if(widget.regExp.hasMatch(text)){
@@ -154,14 +148,12 @@ class _MyTextFormFieldState extends State<MyTextFormField> {
   }
 }
 
-
 String? validatename(value){
   if(value.isEmpty){
     return "Please enter firstname";
   }
   return null;
 }
-
 
 String? validatepass(value){
   if(value.isEmpty){
@@ -176,3 +168,6 @@ String? validatepass(value){
   }
   return null;
 }
+final borderstyle=new OutlineInputBorder(borderSide: BorderSide(
+    style: BorderStyle.solid, color: Colors.white, width: 1.0),
+  borderRadius: const BorderRadius.all(const Radius.circular(0.0),),);
