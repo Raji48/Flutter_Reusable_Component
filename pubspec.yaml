@@ -32,6 +32,9 @@ dependencies:
   flutter_redux: ^0.8.2
   redux_thunk: ^0.4.0
   dio: ^4.0.0
+  intl_phone_number_input: ^0.7.0+2
+  intl_phone_field: ^2.1.0
+  country_picker: ^2.0.8
 
 dev_dependencies:
   flutter_test:
