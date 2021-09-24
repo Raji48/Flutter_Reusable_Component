@@ -164,7 +164,6 @@ class _RegisterState extends State<Register> {
                         conpassErrorValid=true;
                       });
                     }
-
                   },
                   onFieldSubmitted: (value) {
                     formkey.currentState!.validate();
