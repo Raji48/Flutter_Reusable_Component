@@ -21,6 +21,7 @@ class _CustomeButtom extends State<CustomButtom> {
     return Stack(
         children: <Widget> [
           Material(
+            color: Colors.transparent,
               child: InkWell(
                   onTap: (){
                     widget.onPressed();
